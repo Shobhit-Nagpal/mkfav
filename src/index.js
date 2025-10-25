@@ -1,1 +1,43 @@
-console.log('Hello, world')
+import { icons } from "lucide";
+import { program } from "commander";
+import sharp from "sharp";
+import toIco from "to-ico";
+import * as fs from "fs";
+import { generateSvgString, transformIconName } from "./utils.js";
+
+program
+  .name("favigen")
+  .description("Convert lucide icons to favicons")
+  .version("0.1.0")
+  .requiredOption("-i, --icon <type>", "Icon to convert");
+
+program.parse();
+
+async function generateFavicon() {
+  try {
+    const options = program.opts();
+    const iconName = transformIconName(options.icon);
+
+    const icon = icons[iconName];
+    if (icon === undefined) {
+      console.error("Icon does not exist");
+      process.exit(1);
+    }
+
+    const svgIconString = generateSvgString(icon);
+
+    const pngBuffer = await sharp(Buffer.from(svgIconString))
+      .resize(32, 32)
+      .png()
+      .toBuffer();
+    const icoBuffer = await toIco([pngBuffer]);
+    fs.writeFileSync("icon.ico", icoBuffer);
+
+    console.log("Icon generated!");
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+}
+
+generateFavicon();
