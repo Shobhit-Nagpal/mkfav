@@ -1,20 +1,39 @@
 {
-  "name": "favigen",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "mkfav",
+  "version": "0.1.0",
+  "description": "CLI tool to convert Lucide icons into favicons",
+  "type": "module",
+  "bin": {
+    "mkfav": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
   "scripts": {
-    "generate": "node src/index.js"
+    "generate": "node src/index.js",
+    "prepublishOnly": "npm install",
+    "publish:npm": "npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shobhit-Nagpal/favigen.git"
+    "url": "git+https://github.com/Shobhit-Nagpal/mkfav.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "favicon",
+    "lucide",
+    "icon",
+    "cli"
+  ],
+  "author": "Shobhit Nagpal <shobhitsnagpal@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Shobhit-Nagpal/favigen/issues"
+    "url": "https://github.com/Shobhit-Nagpal/mkfav/issues"
   },
-  "homepage": "https://github.com/Shobhit-Nagpal/favigen#readme"
+  "homepage": "https://github.com/Shobhit-Nagpal/mkfav#readme",
+  "dependencies": {
+    "commander": "^14.0.1",
+    "lucide": "^0.548.0",
+    "sharp": "^0.34.4",
+    "to-ico": "^1.1.5"
+  }
 }
