@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { icons } from "lucide";
 import { program } from "commander";
 import sharp from "sharp";
