@@ -10,7 +10,9 @@
     "src"
   ],
   "scripts": {
-    "generate": "node src/index.js"
+    "generate": "node src/index.js",
+    "prepublishOnly": "npm install",
+    "publish:npm": "npm publish"
   },
   "repository": {
     "type": "git",
