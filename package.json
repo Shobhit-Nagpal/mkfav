@@ -1,9 +1,14 @@
 {
   "name": "mkfav",
   "version": "0.1.0",
-  "description": "",
+  "description": "CLI tool to convert Lucide icons into favicons",
   "type": "module",
-  "main": "index.js",
+  "bin": {
+    "mkfav": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
   "scripts": {
     "generate": "node src/index.js"
   },
@@ -11,8 +16,13 @@
     "type": "git",
     "url": "git+https://github.com/Shobhit-Nagpal/mkfav.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "favicon",
+    "lucide",
+    "icon",
+    "cli"
+  ],
+  "author": "Shobhit Nagpal <shobhitsnagpal@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Shobhit-Nagpal/mkfav/issues"
