@@ -1,0 +1,20 @@
+{
+  "name": "favigen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shobhit-Nagpal/favigen.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shobhit-Nagpal/favigen/issues"
+  },
+  "homepage": "https://github.com/Shobhit-Nagpal/favigen#readme"
+}
