@@ -1,0 +1,535 @@
+---
+const installCommand = "npm install -g mkfav";
+const npxCommand = "npx mkfav --icon heart";
+
+const copyToClipboard = `
+function copyCommand(command, buttonId) {
+    navigator.clipboard.writeText(command).then(() => {
+        const button = document.getElementById(buttonId);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.innerHTML = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    });
+}
+`;
+
+const usageExamples = [
+    {
+        title: "Basic usage",
+        command: "mkfav --icon heart",
+        description: "Creates icon.ico in current directory"
+    },
+    {
+        title: "Custom filename",
+        command: "mkfav --icon folder-git-2 --output favicon",
+        description: "Outputs as favicon.ico"
+    },
+    {
+        title: "Full path with extension",
+        command: "mkfav --icon rocket --output my-site-favicon.ico",
+        description: "Explicit filename with .ico extension"
+    }
+];
+
+const options = [
+    {
+        flag: "--icon, -i",
+        description: "Lucide icon name (kebab-case)",
+        required: true
+    },
+    {
+        flag: "--output, -o",
+        description: "Output filename (optional, defaults to icon.ico)",
+        required: false
+    },
+    {
+        flag: "--version, -v",
+        description: "Show version number",
+        required: false
+    },
+    {
+        flag: "--help, -h",
+        description: "Show help",
+        required: false
+    }
+];
+
+const features = [
+    "5000+ Lucide icons available",
+    "Generates proper .ico format",
+    "Zero configuration needed",
+    "Custom output filenames",
+    "Fast - converts in milliseconds",
+    "Works globally or with npx"
+];
+---
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>mkfav - Convert Lucide Icons to Favicons</title>
+    <meta name="description" content="CLI tool to convert any Lucide icon into a favicon. One command, 5000+ icons available." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mkfav.dev" />
+    <meta property="og:title" content="mkfav - Convert Lucide Icons to Favicons" />
+    <meta property="og:description" content="CLI tool to convert any Lucide icon into a favicon. One command, 5000+ icons available." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://mkfav.dev" />
+    <meta name="twitter:title" content="mkfav - Convert Lucide Icons to Favicons" />
+    <meta name="twitter:description" content="CLI tool to convert any Lucide icon into a favicon. One command, 5000+ icons available." />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>mkfav</h1>
+            <a href="https://github.com/Shobhit-Nagpal/mkfav" class="github-link" target="_blank" rel="noopener">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+        </div>
+        
+        <div class="hero">
+            <h1>mkfav</h1>
+            <p>Convert Lucide icons to favicons. One command.</p>
+            
+            <div class="install-blocks">
+                <div class="install-block">
+                    <code>{installCommand}</code>
+                    <button class="copy-button" id="copy-install" onclick="copyCommand('{installCommand}', 'copy-install')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                            <path d="m4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                        </svg>
+                        Copy
+                    </button>
+                </div>
+                
+                <div class="install-block npx">
+                    <code>{npxCommand}</code>
+                    <button class="copy-button" id="copy-npx" onclick="copyCommand('{npxCommand}', 'copy-npx')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                            <path d="m4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                        </svg>
+                        Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Features</h2>
+            <ul class="features">
+                {features.map(feature => (
+                    <li>{feature}</li>
+                ))}
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Usage</h2>
+            <div class="examples">
+                {usageExamples.map(example => (
+                    <div class="example">
+                        <div class="example-title">{example.title}</div>
+                        <div class="code-block">
+                            <code>$ {example.command}</code>
+                        </div>
+                        <div class="example-description">{example.description}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Options</h2>
+            <div class="options-list">
+                {options.map(option => (
+                    <div class="option">
+                        <div class="option-header">
+                            <code class="option-flag">{option.flag}</code>
+                            {option.required && <span class="required-badge">Required</span>}
+                        </div>
+                        <div class="option-description">{option.description}</div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Icon Names</h2>
+            <p class="icon-info">
+                Use the kebab-case version of any icon from <a href="https://lucide.dev/icons" target="_blank" rel="noopener">lucide.dev</a>
+            </p>
+            <div class="icon-examples">
+                <div class="icon-example">
+                    <code>arrow-right</code>
+                    <span>→</span>
+                    <span>ArrowRight</span>
+                </div>
+                <div class="icon-example">
+                    <code>folder-git-2</code>
+                    <span>→</span>
+                    <span>FolderGit2</span>
+                </div>
+                <div class="icon-example">
+                    <code>zap</code>
+                    <span>→</span>
+                    <span>Zap</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>© {new Date().getFullYear()} mkfav</div>
+            <div>
+                <a href="https://github.com/Shobhit-Nagpal/mkfav" target="_blank" rel="noopener">GitHub</a>
+                <span class="separator">•</span>
+                <a href="https://www.npmjs.com/package/mkfav" target="_blank" rel="noopener">npm</a>
+            </div>
+        </div>
+    </div>
+
+    <script set:html={copyToClipboard}></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2563eb;
+        }
+        
+        .github-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #374151;
+            transition: color 0.2s ease;
+        }
+        
+        .github-link:hover {
+            color: #2563eb;
+        }
+        
+        .github-link svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #2563eb;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 32px;
+        }
+        
+        .install-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 60px;
+        }
+        
+        .install-block {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .install-block.npx {
+            background: #fefce8;
+            border-color: #fde047;
+        }
+        
+        .install-block code {
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: #059669;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        
+        .install-block.npx code {
+            color: #ca8a04;
+        }
+        
+        .copy-button {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .copy-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        
+        .copy-button.copied {
+            background: #059669;
+        }
+        
+        .copy-button svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #1f2937;
+        }
+        
+        .features {
+            list-style: none;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            font-size: 1rem;
+            color: #4b5563;
+        }
+        
+        .features li::before {
+            content: "✓";
+            color: #059669;
+            margin-right: 12px;
+            font-weight: 600;
+        }
+        
+        .examples {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .example {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .example-title {
+            background: #f8fafc;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 0.9rem;
+        }
+        
+        .code-block {
+            background: #1f2937;
+            padding: 16px;
+        }
+        
+        .code-block code {
+            color: #f9fafb;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .example-description {
+            padding: 12px 16px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .options-list {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .option {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 16px;
+        }
+        
+        .option-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .option-flag {
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .required-badge {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .option-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .icon-info {
+            color: #4b5563;
+            margin-bottom: 20px;
+        }
+        
+        .icon-info a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        .icon-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .icon-examples {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .icon-example {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .icon-example code {
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        .icon-example span:nth-child(2) {
+            color: #9ca3af;
+        }
+        
+        .icon-example span:last-child {
+            color: #6b7280;
+        }
+        
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 0;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .footer a {
+            color: #6b7280;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            color: #2563eb;
+        }
+        
+        .separator {
+            margin: 0 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { 
+                font-size: 2.5rem; 
+            }
+            
+            .hero p { 
+                font-size: 1.1rem; 
+            }
+            
+            .container { 
+                padding: 0 16px; 
+            }
+            
+            .footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+    </style>
+</html>
