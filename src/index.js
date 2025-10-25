@@ -6,7 +6,7 @@ import * as fs from "fs";
 import { generateSvgString, transformIconName } from "./utils.js";
 
 program
-  .name("favigen")
+  .name("mkfav")
   .description("Convert lucide icons to favicons")
   .version("0.1.0")
   .requiredOption("-i, --icon <type>", "Icon to convert");
