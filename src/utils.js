@@ -11,6 +11,21 @@ export function transformIconName(name) {
 }
 
 /**
+ * Ensures output filename is correct
+ * @param {string} name
+ * @returns {string}
+ */
+export function ensureFileName(filename) {
+  if (filename === undefined || filename.length === 0) {
+    return "icon.ico";
+  }
+
+  const isIcoSuffixPresent = filename.endsWith(".ico");
+
+  return isIcoSuffixPresent ? filename : `${filename}.ico`;
+}
+
+/**
  * Capitalizes first letter of a word
  * @param {string} word
  * @returns {string}

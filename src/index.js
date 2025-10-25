@@ -3,13 +3,14 @@ import { program } from "commander";
 import sharp from "sharp";
 import toIco from "to-ico";
 import * as fs from "fs";
-import { generateSvgString, transformIconName } from "./utils.js";
+import { ensureFileName, generateSvgString, transformIconName } from "./utils.js";
 
 program
   .name("mkfav")
   .description("Convert lucide icons to favicons")
   .version("0.1.0")
-  .requiredOption("-i, --icon <type>", "Icon to convert");
+  .requiredOption("-i, --icon <type>", "Icon to convert")
+  .option("-o, --output <type>", "Output file name");
 
 program.parse();
 
@@ -17,6 +18,7 @@ async function generateFavicon() {
   try {
     const options = program.opts();
     const iconName = transformIconName(options.icon);
+    const outputFileName = ensureFileName(options.output);
 
     const icon = icons[iconName];
     if (icon === undefined) {
@@ -31,7 +33,7 @@ async function generateFavicon() {
       .png()
       .toBuffer();
     const icoBuffer = await toIco([pngBuffer]);
-    fs.writeFileSync("icon.ico", icoBuffer);
+    fs.writeFileSync(outputFileName, icoBuffer);
 
     console.log("Icon generated!");
   } catch (err) {
