@@ -2,6 +2,7 @@
   "name": "favigen",
   "version": "0.1.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "generate": "node src/index.js"
@@ -16,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/Shobhit-Nagpal/favigen/issues"
   },
-  "homepage": "https://github.com/Shobhit-Nagpal/favigen#readme"
+  "homepage": "https://github.com/Shobhit-Nagpal/favigen#readme",
+  "dependencies": {
+    "commander": "^14.0.1",
+    "lucide": "^0.548.0",
+    "sharp": "^0.34.4",
+    "to-ico": "^1.1.5"
+  }
 }
